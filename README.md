@@ -53,7 +53,7 @@ docker run -td -p 8080:8080 -p 50000:50000 \
     jenkins/jenkins:lts-jdk11 # Running in background with persistent data
 ```
 
-## Expose Jenkins trough Nginx
+## Expose Jenkins behind Nginx
 
 ```bash
 
@@ -61,8 +61,21 @@ docker run -td --name nginx \
     -p 1080:80 \
     --link jenkins:jenkins \
     -v nginx_conf.d:/etc/nginx/conf.d \
-    nginx
+    nginx # Run nginx container
 
-docker exec -it nginx bash
+docker exec -it nginx bash # Bash shell inside nginx container
 
+# Inside the container
+
+apt update && apt install -y vim # Install vim
+vim /etc/nginx/conf.d/jenkins.conf # Create configuration file to expose jenkins behind nginx
+
+# Add jenkins.conf content
+
+nginx -s reload # Reload nginx
+
+
+
+## Dont forget to add jenkins entry to hosts file
+echo '127.0.0.1 jenkins.dou_university.com' | sudo tee -a /etc/hosts # Append line to /ets/host file to point the hostame to the ip address
 ```
