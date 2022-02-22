@@ -18,14 +18,14 @@ docker rm jenkins # Delete container
 
 docker run -p 8080:8080 -p 50000:50000 --name jenkins jenkins/jenkins:lts-jdk11 # Running in background
 
-docker rm jenkins # Force deletion
-
 docker logs jenkins # See logs to obtain credentials
 
 docker exec -it jenkins bash # Bash shell inside container
 
 cat /var/jenkins_home/secrets/initialAdminPassword # Print initial admin password for jenkins
 
+docker rm -f jenkins # Force deletion
 
+-v jenkins_home:/var/jenkins_home
 
 ```
