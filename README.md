@@ -8,7 +8,7 @@ Docker laboratory for the DOU/TechM University class.
 
 ## Launch Jenkins Container
 
-```sh
+```bash
 docker pull jenkins/jenkins:lts-jdk11 # To pull the latest jenkins docker image
 docker images # To see images list
 
@@ -28,12 +28,16 @@ docker rm -f jenkins # Force deletion
 
 # NOTE: Avoid using a bind mount from a folder on the host machine into /var/jenkins_home, as this might result in file permission issues (the user used inside the container might not have rights to the folder on the host machine). If you really need to bind mount jenkins_home, ensure that the directory on the host is accessible by the jenkins user inside the container (jenkins user - uid 1000)
 
-docker run -td -p 8080:8080 -p 50000:50000 \
-    --name jenkins \
+docker run -td --name jenkins \
+    -p 8080:8080 \
+    -p 50000:50000 \
     -v jenkins_home:/var/jenkins_home \
     jenkins/jenkins:lts-jdk11 # Running in background with persistent data
 
 # NOTE: if you want to use a directory as a persisnten data, you should pass the absolute path and confirm the permissions.
+
+
+# NOTE: The volume is automatically created by the docker run command.
 
 docker volume ls # List volumes created
 
@@ -47,8 +51,18 @@ docker run -td -p 8080:8080 -p 50000:50000 \
     --name jenkins \
     -v jenkins_home:/var/jenkins_home \
     jenkins/jenkins:lts-jdk11 # Running in background with persistent data
+```
 
+## Expose Jenkins trough Nginx
 
+```bash
 
+docker run -td --name nginx \
+    -p 1080:80 \
+    --link jenkins:jenkins \
+    -v nginx_conf.d:/etc/nginx/conf.d \
+    nginx
+
+docker exec -it nginx bash
 
 ```
