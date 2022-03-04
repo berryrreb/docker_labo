@@ -65,7 +65,7 @@ docker run -td --name jenkins \
     jenkins/jenkins:lts-jdk11
 ```
 
-> NOTE: if you want to use a directory as a persisnten data, you should pass the absolute path and confirm the permissions.
+> NOTE: If you want to use a directory as a persisnten data, you should pass the absolute path and confirm the permissions.
 
 > NOTE: The volume is automatically created by the docker run command.
 
