@@ -2,7 +2,7 @@
 
 Docker laboratory for the DOU/TechM University class.
 
-## Prerrequisites
+## Prerequisites
 
 + Docker desktop · [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
 + Visual Studio Code (Recommended) · [Download](https://code.visualstudio.com/download)
