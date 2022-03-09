@@ -129,3 +129,75 @@ Append line to /ets/host file to point the hostame to the ip address
 ```bash
 echo '127.0.0.1 jenkins.dou_university.com' | sudo tee -a /etc/hosts
 ```
+> **Open the URL in your browser**
+
+[jenkins.dou_university.com:1080](http://jenkins.dou_university.com:1080)
+
+## Run the complete environment with Docker Compose
+
+Start full compose application
+```bash
+docker-compose -f docker-labo-compose/jenkinsNginxCompose.yaml up -d
+```
+
+Stop and remove resources for compose
+```bash
+docker-compose -f docker-labo-compose/jenkinsNginxCompose.yaml down
+```
+
+### docker-compose available commands
+```bash
+Commands:
+  build              Build or rebuild services
+  config             Validate and view the Compose file
+  create             Create services
+  down               Stop and remove resources
+  events             Receive real time events from containers
+  exec               Execute a command in a running container
+  help               Get help on a command
+  images             List images
+  kill               Kill containers
+  logs               View output from containers
+  pause              Pause services
+  port               Print the public port for a port binding
+  ps                 List containers
+  pull               Pull service images
+  push               Push service images
+  restart            Restart services
+  rm                 Remove stopped containers
+  run                Run a one-off command
+  scale              Set number of containers for a service
+  start              Start services
+  stop               Stop services
+  top                Display the running processes
+  unpause            Unpause services
+  up                 Create and start containers
+  version            Show version information and quit
+```
+
+## Docker build example
+
+Creation of a Dockerfile
+
+```docker
+FROM php:7.4-apache
+
+WORKDIR /var/www/html
+COPY php/index.php ./
+EXPOSE 80
+```
+
+Build image
+```bash
+docker build -t university/php-app .
+```
+
+List images
+```bash
+docker images
+```
+
+Run container from new custom image
+```bash
+docker run -it --name university-php -p 2080:80 university/php-app
+```
