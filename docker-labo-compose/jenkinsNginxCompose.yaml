@@ -1,0 +1,27 @@
+# docker-compose.yaml
+version: "3.8"
+volumes:
+  jenkins_home:
+  nginx_conf.d:
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      TZ: America/Mexico_City
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 1080:80
+    volumes:
+      - nginx_conf.d:/etc/nginx/conf.d
+    restart: unless-stopped
+    environment:
+      TZ: America/Mexico_City
