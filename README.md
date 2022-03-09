@@ -201,3 +201,10 @@ Run container from new custom image
 ```bash
 docker run -it --name university-php -p 2080:80 university/php-app
 ```
+
+### Helpful commands for cleanup
+```bash
+docker system prune
+
+docker system prune -a
+```
